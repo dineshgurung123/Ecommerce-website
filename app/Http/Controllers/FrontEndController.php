@@ -29,9 +29,12 @@ public function products(){
     return view ('products');
 }
 
-public function singleProduct(){
+public function singledproduct($id){
 
-    return view ('singleProduct');
+  $product = Product::find($id);
+
+    return view ('single_product', ['product'=>$product]);
+
 }
 
 public function checkout(){

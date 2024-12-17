@@ -13,4 +13,4 @@ Route::get('/cart', [FrontEndController::class,'cart']);
 Route::get('/checkout', [FrontEndController::class,'checkout']);
 Route::get('/', [FrontEndController::class,'index']);
 Route::get('/products', [FrontEndController::class,'products']);
-Route::get('/singleProduct', [FrontEndController::class,'singledproduct']);
+Route::get('/singleProduct/{id}', [FrontEndController::class,'singledproduct'])->name('single_product');
