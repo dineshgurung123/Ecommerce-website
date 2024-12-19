@@ -8,6 +8,10 @@
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-md-12">
+                        @foreach($errors->all() as $error)
+                        <h1>{{$error}}</h1>
+
+                        @endforeach
                         <div class="product-single">
                             <div class="product-img">
                                 <img src="{{asset('img/'. $product->image)}}" alt="Product Image">
@@ -15,7 +19,7 @@
                             <div class="product-content">
                                 <h2>{{$product->name}}</h2>
                                 <h3>Rs {{$product->price}}</h3>
-                                <form action="" method="POSt">
+                                <form action="{{route('add_to_cart')}}" method="POST">
                                 @csrf
                                 <input type="hidden" name="id" value="{{$product->id}}">
                                 <input type="hidden" name="name" value="{{$product->name}}">
@@ -27,8 +31,7 @@
 
                                 </form>
                             </div>
-
-
+                            
                         </div>
                     </div>
                   
