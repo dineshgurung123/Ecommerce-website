@@ -178,7 +178,7 @@
                 
                                    <h3>Rs{{ $product->sale_price}}</h3>
                                     <h3 style="text-decoration: line-through">Rs{{$product->price}}</h3>
-                                     @else
+                                     @else 
 
                                      <h3>Rs {{$product->price}}</h3>
                                      @endif

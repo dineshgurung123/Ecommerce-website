@@ -64,36 +64,36 @@
                 <th>Subtotal</th>
             </tr>
 
+            @if(Session::has('cart'))
+    @foreach(Session::get('cart') as $product)           
+        <tr>
+            <td>
+                <div class="product-info">
+                    <img src="{{asset('img/' .$product['image'])}}" alt="{{ $product['name'] }}">
+                    <div>
+                        <p>{{ $product['name'] }}</p>
+                        <small><span>$</span>{{ $product['price'] }}</small>
+                        <br>
+                        <form> 
+                            <input type="submit" name="remove_btn" class="remove-btn" value="remove">
+                        </form>
+                    </div>
+                </div>
+            </td>
 
-         
-                    <tr>
-                        <td>
-                            <div class="product-info">
-                                <img src="img/menu-1.jpg">
-                                <div>
-                                    <p>Hot Coffee</p>
-                                    <small><span>$</span>199</small>
-                                    <br>
-                                    <form > 
-                                      
-                                        <input type="submit" name="remove_btn" class="remove-btn" value="remove">
-                                    </form>
-                                </div>
-                            </div>
-                        </td>
+            <td>
+                <form>
+                    <input type="number" name="quantity" value="1">
+                    <input type="submit" value="edit" class="edit-btn" name="edit_product_quantity_btn">
+                </form>
+            </td>
 
-                        <td>
-                            <form>
-                                <input type="number" name="quantity" value="1">
-                                <input type="submit" value="edit" class="edit-btn" name="edit_product_quantity_btn">
-                            </form>
-                        </td>
-
-                        <td>
-                            <span class="product-price">$199</span>
-                        </td>
-                    </tr>
-           
+            <td>
+                <span class="product-price">$199</span>
+            </td>
+        </tr>
+    @endforeach
+@endif
 
         </table>
 
