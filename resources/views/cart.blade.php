@@ -74,7 +74,10 @@
                         <p>{{ $product['name'] }}</p>
                         <small><span>$</span>{{ $product['price'] }}</small>
                         <br>
-                        <form> 
+                        <form action="{{route('remove_from_cart')}}" method="POST">
+                            
+                        @csrf
+                        <input type="hidden" name="id" value="{{ $product['id']}}">
                             <input type="submit" name="remove_btn" class="remove-btn" value="remove">
                         </form>
                     </div>
@@ -89,7 +92,7 @@
             </td>
 
             <td>
-                <span class="product-price">$199</span>
+                <span class="product-price">Rs{{$product['price']}}</span>
             </td>
         </tr>
     @endforeach
@@ -103,7 +106,12 @@
       
                 <tr>
                     <td>Total</td>
-                    <td>$199</td>
+                    
+                   @if(Session::has('totalPrice'))
+                   <td>Rs{{Session::get('totalPrice')}}</td>
+
+                   @endif
+
                 </tr>
            
             </table>

@@ -43,8 +43,9 @@ public function checkout(){
 }
 
 
-public function cart(){
-
+public function cart(Request $request){
+        
+    $this->calculateTotal($request);
     return view ('cart');
 }
 
@@ -70,6 +71,9 @@ function add_to_cart(REQUEST $request)
             );
             $cart[$request->id] = $product_array;
             $request->session()->put('cart', $cart);
+
+                    $this->calculateTotal($request);
+
             return view('cart');
         }
         else
@@ -94,9 +98,40 @@ function add_to_cart(REQUEST $request)
 
         $cart[$request->id] = $product_array;
         $request->session()->put('cart', $cart);
+        $this->calculateTotal($request);
         return view('cart');
     }
 }
+
+
+public function calculateTotal($request){
+
+    $cart = $request->session()->get('cart');
+    $totalPrice = 0;
+
+    foreach($cart as $c){
+
+        $totalPrice = $totalPrice * $c['quantity'] + $c['price'];
+    }
+
+    $request->session()->put('totalPrice', $totalPrice);
+
+}
+
+ public function remove_from_cart(Request $request){
+
+  
+    $cart = $request->session()->get('cart');
+    $id_to_delete = $request->id;
+
+    unset($cart[$id_to_delete]);
+
+    $request->session()->put('cart', $cart);
+
+    return redirect()->back()->withErrors(['message'=>'cart item deleted successfully']);
+
+
+ }
 
 
 
